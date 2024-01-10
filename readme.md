@@ -24,6 +24,11 @@ This repository contains automated tests for the Magneto Lumea e-commerce platfo
 
 ## Running Tests
 
+### Run All Tests 
+    
+    
+    npx playwright test 
+
 ### Run All Tests (Headed Mode)
     
     
