@@ -26,25 +26,25 @@ This repository contains automated tests for the Magneto Lumea e-commerce platfo
 
 ### Run All Tests (Headed Mode)
     
-    ```
+    
     npx playwright test --headed
-    ```
+    
 ### Run All Tests (Headed Mode)
    
-    ```
+    
     npx playwright test --browser=YourBrowserOfChoice
-    ```
+    
 ### Run Smoke Tests Only
    
-    ```
+    
     npm run tests:smoke
-    ```
+    
     
 ### Run Regression Tests Only
     
-    ```
+    
     npm run tests:regression
-    ```
+    
 
 ## Test Scenarios
 
