@@ -32,7 +32,7 @@ This repository contains automated tests for the [LambdaTest E-Commerce platform
 - **Run a Specific Test**:  
   To run a specific test file, in one or multiple enviroments, refer to Playwright docs. Example:
   ```bash
-  npx playwright test path/to/test.spec.ts --config=playwright.config.ts --project=chromium --project=firefox
+  npx playwright test path/to/test.spec.ts --config=playwright.config.ts --project=chromium --project=firefox --headed
   ```    
 
 ## Test Scenarios
