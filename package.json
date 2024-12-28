@@ -6,7 +6,9 @@
   "scripts": {
     "tests:smoke": "playwright test --config=smoke.config.ts",
     "tests:regression": "playwright test --config=regression.config.ts",
-    "tests:all": "npm run tests:smoke && npm run tests:regression"
+    "tests:all": "npm run tests:smoke && npm run tests:regression",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write ."
   },
   "author": "",
   "license": "ISC",

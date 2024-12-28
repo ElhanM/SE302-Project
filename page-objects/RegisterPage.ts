@@ -30,23 +30,36 @@ export class RegisterPage {
   async visit() {
     await this.page.goto('/index.php?route=account/register')
   }
-  
-  async register(firstName: string, lastName: string, email: string, telephone: string, password: string) {
+
+  async register(
+    firstName: string,
+    lastName: string,
+    email: string,
+    telephone: string,
+    password: string,
+  ) {
     await this.firstNameInput.fill(firstName)
     await this.lastNameInput.fill(lastName)
     await this.emailInput.fill(email)
     await this.telephoneInput.fill(telephone)
     await this.passwordInput.fill(password)
     await this.confirmPasswordInput.fill(password)
-    await this.privacyPolicyCheckbox.check()
-    await this.continueButton.click()
+    await this.privacyPolicyCheckbox.check({
+      force: true,
+    })
+    await this.continueButton.click({
+      force: true,
+    })
   }
 
+  // DOCS:
   // Testing for successfull registration is a bit tricky because the email address should be unique every time
   // Providing random credentials could result in flaky tests
   async assertSuccessMessage() {
     await expect(this.successMessage).toBeVisible()
-    await expect(this.successMessage).toContainText('Your Account Has Been Created!')
+    await expect(this.successMessage).toContainText(
+      'Your Account Has Been Created!',
+    )
   }
 
   async assertEmailAlreadyRegisteredMessage() {

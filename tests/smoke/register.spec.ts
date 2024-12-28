@@ -14,7 +14,13 @@ test.describe('Register Page', () => {
   })
 
   test('should throw an error when trying to register with an already registered email', async () => {
-    await registerPage.register('John', 'Doe', 'john.doe@example.com', '1234567890', 'Password123')
+    await registerPage.register(
+      'John',
+      'Doe',
+      'john.doe@example.com',
+      '1234567890',
+      'Password123',
+    )
     await registerPage.assertEmailAlreadyRegisteredMessage()
   })
 })

@@ -23,7 +23,9 @@ export class LoginPage {
   async login(email: string, password: string) {
     await this.emailInput.fill(email)
     await this.passwordInput.fill(password)
-    await this.loginButton.click()
+    // DOCS:
+    // regular button click sometimes not working in headless mode for webkit on ubuntu, force click fixes it
+    await this.loginButton.click({ force: true })
   }
 
   async assertErrorMessage() {
@@ -31,6 +33,8 @@ export class LoginPage {
   }
 
   async assertSuccessfulLogin(baseURL: string) {
-    await expect(this.page).toHaveURL(baseURL + '/index.php?route=account/account')
+    await expect(this.page).toHaveURL(
+      baseURL + '/index.php?route=account/account',
+    )
   }
 }
