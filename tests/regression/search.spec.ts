@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { HomePage } from '../../page-objects/HomePage'
 
-test.describe('Regression Test - Search Functionality', () => {
+test.describe('Search Functionality', () => {
   let homePage: HomePage
 
   test.beforeEach(async ({ page }) => {
