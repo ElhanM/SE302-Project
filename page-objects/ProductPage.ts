@@ -4,6 +4,7 @@ import { SearchablePage } from './SearchablePage'
 export class ProductPage extends SearchablePage {
   readonly productGrid: Locator
   readonly products: Locator
+  readonly noResultsMessage: Locator
 
   constructor(page: Page) {
     super(page)
@@ -11,6 +12,7 @@ export class ProductPage extends SearchablePage {
     this.products = this.productGrid.locator(
       'div.product-layout.product-grid.no-desc',
     )
+    this.noResultsMessage = page.locator('p:has-text("There is no product that matches the search criteria.")')
   }
 
   async visit() {
