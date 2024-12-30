@@ -1,15 +1,25 @@
 import { test, expect } from '@playwright/test'
-import { HomePage } from '../../page-objects/HomePage'
+import { ProductPage } from '../../page-objects/ProductPage'
 
 test.describe('Search Functionality', () => {
-  let homePage: HomePage
+  let productPage: ProductPage
 
   test.beforeEach(async ({ page }) => {
-    homePage = new HomePage(page)
-    await homePage.visit()
+    productPage = new ProductPage(page)
+    await productPage.visit()
   })
 
-  test('should search for a product', async ({ page }) => {
-    await homePage.searchFor('iMac')
+  // Assuming search for iMac returns at least one product
+  test.only('should display product details', async ({ page }) => {
+    await productPage.searchFor('iMac')
+    await expect(productPage.productGrid).toBeVisible()
+    await expect(productPage.products.first()).toBeVisible()
+
+    const firstProduct = productPage.products.first()
+    const firstProductTitle = await productPage.getProductTitle(firstProduct)
+    const firstProductPrice = await productPage.getProductPrice(firstProduct)
+
+    expect(firstProductTitle.innerText()).toBe('iMac')
+    expect(firstProductPrice.innerText()).toContain('$')
   })
 })

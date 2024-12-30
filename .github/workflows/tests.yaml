@@ -29,6 +29,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # https://playwright.dev/docs/ci-intro
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 

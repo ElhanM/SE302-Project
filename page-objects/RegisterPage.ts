@@ -52,8 +52,7 @@ export class RegisterPage {
     })
   }
 
-  // DOCS:
-  // Testing for successfull registration is a bit tricky because the email address should be unique every time
+  // Testing for successful registration is a bit tricky because the email address should be unique every time
   // Providing random credentials could result in flaky tests
   async assertSuccessMessage() {
     await expect(this.successMessage).toBeVisible()
