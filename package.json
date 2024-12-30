@@ -8,12 +8,16 @@
     "tests:regression": "playwright test --config=regression.config.ts",
     "tests:all": "npm run tests:smoke && npm run tests:regression",
     "prettier:check": "prettier --check .",
-    "prettier:fix": "prettier --write ."
+    "prettier:fix": "prettier --write .",
+    "prepare": "husky"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@playwright/test": "^1.49.1",
     "prettier": "^3.4.2"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }
