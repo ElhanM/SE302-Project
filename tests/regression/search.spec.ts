@@ -10,7 +10,7 @@ test.describe('Search Functionality', () => {
   })
 
   // Assuming search for iMac returns at least one product
-  test.only('should display product details', async ({ page }) => {
+  test('should display product details', async ({ page }) => {
     await productPage.searchFor('iMac')
     await expect(productPage.productGrid).toBeVisible()
     await expect(productPage.products.first()).toBeVisible()
