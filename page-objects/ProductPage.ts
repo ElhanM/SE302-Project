@@ -12,7 +12,9 @@ export class ProductPage extends SearchablePage {
     this.products = this.productGrid.locator(
       'div.product-layout.product-grid.no-desc',
     )
-    this.noResultsMessage = page.locator('p:has-text("There is no product that matches the search criteria.")')
+    this.noResultsMessage = page.locator(
+      'p:has-text("There is no product that matches the search criteria.")',
+    )
   }
 
   async visit() {
