@@ -19,7 +19,7 @@ test.describe('Search Functionality', () => {
     const firstProductTitle = await productPage.getProductTitle(firstProduct)
     const firstProductPrice = await productPage.getProductPrice(firstProduct)
 
-    expect(firstProductTitle.innerText()).toBe('iMac')
-    expect(firstProductPrice.innerText()).toContain('$')
+    expect(await firstProductTitle.innerText()).toBe('iMac')
+    expect(await firstProductPrice.innerText()).toContain('$')
   })
 })
