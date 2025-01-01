@@ -33,4 +33,11 @@ export class ProductPage extends SearchablePage {
     const priceLocator = product.locator('div.caption div.price span.price-new')
     return priceLocator
   }
+
+  async getProductAddToCartButton(product: Locator) {
+    const addToCartButton = product.locator(
+      'div.product-action button:has-text("Add to Cart")',
+    )
+    return addToCartButton
+  }
 }

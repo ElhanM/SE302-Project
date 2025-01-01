@@ -9,7 +9,18 @@ test.describe('Home Page', () => {
     await homePage.visit()
   })
 
-  test('should load home page', async ({ page, baseURL }) => {
+  test('verify that the main parts of the home page are visible', async ({
+    page,
+    baseURL,
+  }) => {
     await expect(page).toHaveURL(baseURL as string)
+    await expect(page).toHaveTitle('Your Store')
+    await expect(homePage.logo).toBeVisible()
+    await expect(homePage.searchBox).toBeVisible()
+    await expect(homePage.cartIcon).toBeVisible()
+    await expect(homePage.myAccount).toBeVisible()
+    await expect(homePage.carouselBanner).toBeVisible()
+    await expect(homePage.topProducts).toBeVisible()
+    await expect(homePage.shopByCategory).toBeVisible()
   })
 })

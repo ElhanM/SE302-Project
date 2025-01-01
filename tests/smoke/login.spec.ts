@@ -13,14 +13,14 @@ test.describe('Login Page', () => {
     await expect(page).toHaveURL(baseURL + '/index.php?route=account/login')
   })
 
-  test('should display error message with invalid credentials', async ({
+  test('should display error message for login with invalid credentials', async ({
     page,
   }) => {
     await loginPage.login('ius-invalid@example.com', 'invalidpassword')
     await loginPage.assertErrorMessage()
   })
 
-  test('should redirect to account page with valid credentials', async ({
+  test('should redirect to account page for login with valid credentials', async ({
     page,
     baseURL,
   }) => {
