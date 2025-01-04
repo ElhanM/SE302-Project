@@ -29,7 +29,7 @@ test.describe('Add to cart', () => {
     await expect(addToCartButton).toBeVisible()
     await addToCartButton.click({ force: true })
 
-    await page.waitForTimeout(2000)
+    await page.waitForTimeout(1000)
 
     const viewCartButton = productDetailsPage.viewCartButton
     await expect(viewCartButton).toBeVisible()
