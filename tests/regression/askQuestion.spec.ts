@@ -1,47 +1,40 @@
 import { test, expect } from '@playwright/test'
+import { AskQuestionPage } from '../../page-objects/AskQuestionPage'
 
 test.describe('Ask Question Functionality', () => {
-  test('Positive Test: Successfully send an enquiry', async ({
-    page,
-    baseURL,
-  }) => {
+  let askQuestionPage: AskQuestionPage
+
+  test.beforeEach(async ({ page, baseURL }) => {
+    askQuestionPage = new AskQuestionPage(page)
     await page.goto(
       `${baseURL}/index.php?route=product/product&path=57&product_id=28`,
     )
-    await page.getByLabel('Ask Question').click()
+  })
 
-    await page.getByPlaceholder('Your name', { exact: true }).fill('John')
-    await page.getByPlaceholder('Your email').fill('john@fake.com')
-    await page.getByPlaceholder('Subject').fill('Nice Phone')
-    await page.getByPlaceholder('Message').fill('I really like it')
-
-    await page.getByRole('button', { name: 'Send message' }).click()
-
-    const successMessage = page.locator(
-      '.alert.alert-success.alert-notification',
+  test('Positive Test: Successfully send an enquiry', async () => {
+    await askQuestionPage.askQuestionButton.click()
+    await askQuestionPage.fillForm(
+      'John',
+      'john@fake.com',
+      'Nice Phone',
+      'I really like it',
     )
-    await expect(successMessage).toBeVisible()
-    await expect(successMessage).toContainText(
+    await askQuestionPage.sendMessageButton.click()
+    await askQuestionPage.verifySuccessMessage(
       'Your enquiry has been successfully sent to the store owner!',
     )
   })
 
-  test('Negative Test: Enquiry fails with empty name', async ({ page }) => {
-    await page.goto(
-      'https://ecommerce-playground.lambdatest.io/index.php?route=product/product&path=57&product_id=28',
+  test('Negative Test: Enquiry fails with empty name', async () => {
+    await askQuestionPage.askQuestionButton.click()
+    await askQuestionPage.fillForm(
+      '',
+      'john@fake.com',
+      'Nice Phone',
+      'I really like it',
     )
-
-    await page.getByLabel('Ask Question').click()
-
-    await page.getByPlaceholder('Your email').fill('john@fake.com')
-    await page.getByPlaceholder('Subject').fill('Nice Phone')
-    await page.getByPlaceholder('Message').fill('I really like it')
-
-    await page.getByRole('button', { name: 'Send message' }).click()
-
-    const errorMessage = page.locator('.error.text-danger')
-    await expect(errorMessage).toBeVisible()
-    await expect(errorMessage).toHaveText(
+    await askQuestionPage.sendMessageButton.click()
+    await askQuestionPage.verifyErrorMessage(
       'Name must be between 3 and 32 characters!',
     )
   })
