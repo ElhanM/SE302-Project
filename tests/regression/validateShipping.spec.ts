@@ -3,7 +3,7 @@ import { CategoryPage } from '../../page-objects/CategoryPage'
 import { CheckoutPage } from '../../page-objects/CheckoutPage'
 import { ProductDetailsPage } from '../../page-objects/ProductDetailsPage'
 
-test.describe('Add to cart', () => {
+test.describe('Shipping Funcionality', () => {
   let categoryPage: CategoryPage
   let checkoutPage: CheckoutPage
   let productDetailsPage: ProductDetailsPage
@@ -15,9 +15,6 @@ test.describe('Add to cart', () => {
 
     // Navigate to the desired category
     await categoryPage.navigateToLaptopsAndNotebooks()
-  })
-
-  test('Validate shipping functionality', async ({ page }) => {
     await page.waitForLoadState('networkidle')
 
     // Select and open the first product
@@ -53,7 +50,9 @@ test.describe('Add to cart', () => {
     await page.waitForLoadState('networkidle')
 
     await page.locator('#input-account-guest').click({ force: true })
+  })
 
+  test('All input fields - Positive', async ({ page }) => {
     await checkoutPage.fillGuestCheckoutDetails({
       firstName: 'Mustafa',
       lastName: 'Sinanovic',
@@ -87,32 +86,7 @@ test.describe('Add to cart', () => {
     await expect(confirmationMessage).toHaveText('Your order has been placed!')
   })
 
-  test('Submit invalid address details during checkout', async ({ page }) => {
-    await page.waitForLoadState('networkidle')
-
-    // Add product to cart and proceed to checkout
-    const firstProduct = categoryPage.products.first()
-    const firstProductTitle = await categoryPage.getProductTitle(firstProduct)
-    await firstProductTitle.click({ force: true })
-
-    await page.waitForLoadState('networkidle')
-    const addToCartButton = productDetailsPage.addToCartButton
-    await addToCartButton.click({ force: true })
-
-    await page.waitForTimeout(2000)
-
-    const viewCartButton = productDetailsPage.viewCartButton
-    await viewCartButton.click({ force: true })
-
-    await page.waitForLoadState('networkidle')
-
-    const checkoutButton = page.locator(
-      'a.btn.btn-lg.btn-primary[href="https://ecommerce-playground.lambdatest.io/index.php?route=checkout/checkout"]',
-    )
-    await checkoutButton.click({ force: true })
-
-    await page.waitForLoadState('networkidle')
-
+  test('Invalid address field - Negative', async ({ page }) => {
     // Enter invalid checkout details
     await checkoutPage.fillGuestCheckoutDetails({
       firstName: '',
