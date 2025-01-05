@@ -8,6 +8,8 @@ export class CategoryPage extends ProductPage {
   readonly filterPanel: Locator
   blueColorCheckbox: Locator
   pinkColorCheckbox: Locator
+  minPriceInput: Locator
+  clearAllButton: Locator
 
   constructor(page: Page) {
     super(page)
@@ -17,6 +19,12 @@ export class CategoryPage extends ProductPage {
     this.filterPanel = this.page.locator('#mz-filter-content-0')
     this.blueColorCheckbox = page.locator('#mz-fc-1-32')
     this.pinkColorCheckbox = page.locator('#mz-fc-1-28')
+    this.minPriceInput = page.locator(
+      '#mz-filter-panel-0-0 input[name="mz_fp[min]"]',
+    )
+    this.clearAllButton = page.locator(
+      'span[data-mz-reset="all"] i.fas.fa-times',
+    )
   }
 
   async navigateToLaptopsAndNotebooks() {
