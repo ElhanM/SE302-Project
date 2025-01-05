@@ -32,17 +32,13 @@ test.describe('Searching filters', () => {
     await expect(categoryPage.filterPanel).toHaveClass(/show/)
   })
 
-  test('should accept price inputs range', async ({ page }) => {
-    const minPriceInput = page.locator(
-      '#mz-filter-panel-0-0 input[name="mz_fp[min]"]',
-    )
+  test('should accept price inputs range', async () => {
+    await categoryPage.minPriceInput.fill('150')
 
-    await minPriceInput.fill('150')
-
-    await expect(minPriceInput).toHaveValue('150') // Assuming '50' is out of range
+    await expect(categoryPage.minPriceInput).toHaveValue('150') // Assuming '50' is out of range
   })
 
-  test('should filter products by selected color', async ({ page }) => {
+  test('should filter products by selected color', async () => {
     // Check the checkboxes even if they are hidden
     await categoryPage.checkBox(categoryPage.blueColorCheckbox)
     await categoryPage.checkBox(categoryPage.pinkColorCheckbox)
@@ -59,25 +55,18 @@ test.describe('Searching filters', () => {
   test('should reset all filters when Clear All is clicked', async ({
     page,
   }) => {
-    const minPriceInput = page.locator(
-      '#mz-filter-panel-0-0 input[name="mz_fp[min]"]',
-    )
-
     // Fill the price input
-    await minPriceInput.fill('150')
+    await categoryPage.minPriceInput.fill('150')
     // Simulate pressing Enter after filling the input
-    await minPriceInput.press('Enter')
-    await expect(minPriceInput).toHaveValue('150') // Assuming '150' is in range
+    await categoryPage.minPriceInput.press('Enter')
+    await expect(categoryPage.minPriceInput).toHaveValue('150') // Assuming '150' is in range
 
     await page.waitForTimeout(2000)
 
-    const clearAllButton = page.locator(
-      'span[data-mz-reset="all"] i.fas.fa-times',
-    )
-    await clearAllButton.waitFor({ state: 'visible' })
-    await clearAllButton.click({ force: true })
+    await categoryPage.clearAllButton.waitFor({ state: 'visible' })
+    await categoryPage.clearAllButton.click({ force: true })
 
     // Verify the value of the price input after clearing
-    await expect(minPriceInput).toHaveValue('98') // Assuming '98' is the reset value
+    await expect(categoryPage.minPriceInput).toHaveValue('98') // Assuming '98' is the reset value
   })
 })
