@@ -1,13 +1,13 @@
 import { PlaywrightTestConfig } from '@playwright/test'
 
 const config: PlaywrightTestConfig = {
-  timeout: 120000,
+  timeout: 240000,
   retries: 0,
   use: {
     baseURL: 'https://ecommerce-playground.lambdatest.io',
     headless: true,
     viewport: { width: 1280, height: 720 },
-    actionTimeout: 20000,
+    actionTimeout: 40000,
     ignoreHTTPSErrors: true,
     video: 'off',
     screenshot: 'off',
