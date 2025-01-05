@@ -72,7 +72,9 @@ test.describe('Shipping Funcionality', () => {
 
     await page.waitForTimeout(2000)
 
-    await checkoutPage.confirmButton.click()
+    await checkoutPage.confirmButton.click({
+      force: true,
+    })
 
     await page.waitForLoadState('networkidle')
 

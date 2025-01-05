@@ -12,7 +12,9 @@ test.describe('Shipping Funcionality', () => {
     await page.waitForLoadState('networkidle')
   })
 
+  // TODO
   test('All input fields - Positive', async ({ page }) => {})
 
+  // TODO
   test('Invalid address field - Negative', async ({ page }) => {})
 })
