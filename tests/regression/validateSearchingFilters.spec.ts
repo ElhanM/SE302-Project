@@ -13,27 +13,25 @@ test.describe('Positive tests - Searching filters', () => {
   })
 
   test('should toggle filter groups on click', async ({ page }) => {
-    const headerToggle = page.locator('.fas.fa-chevron-circle-down.ml-auto')
-    const filterPanel = page.locator('#mz-filter-content-0')
-
-    // Ensure the filter panel starts as visible
-    await expect(filterPanel).toHaveClass(/show/) // Class contains "show"
+    const headerToggle =
+      // Ensure the filter panel starts as visible
+      await expect(categoryPage.filterPanel).toHaveClass(/show/) // Class contains "show"
 
     // Click to toggle visibility
-    await headerToggle.click()
+    await categoryPage.headerToggle.click()
 
     await page.waitForTimeout(2000)
 
     // Wait for the panel's class to no longer include "show"
-    await expect(filterPanel).not.toHaveClass(/show/)
+    await expect(categoryPage.filterPanel).not.toHaveClass(/show/)
 
     // Click again to toggle visibility back
-    await headerToggle.click({ force: true })
+    await categoryPage.headerToggle.click({ force: true })
 
     await page.waitForTimeout(2000)
 
     // Wait for the panel's class to include "show"
-    await expect(filterPanel).toHaveClass(/show/)
+    await expect(categoryPage.filterPanel).toHaveClass(/show/)
   })
 
   //   test('should not accept price inputs outside range', async ({ page }) => {
