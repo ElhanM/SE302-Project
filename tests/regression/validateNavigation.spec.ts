@@ -12,9 +12,11 @@ test.describe('My Account Navigation', () => {
     homePage = new HomePage(page)
     myAccountPage = new MyAccountPage(page)
     await homePage.visit()
+    await page.waitForLoadState('networkidle')
     await homePage.myAccount.click({
       force: true,
     }) // Accessing the myAccount locator
+    await page.waitForLoadState('networkidle')
   })
 
   // Positive Tests: Pages that are accessible
