@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { CategoryPage } from '../../page-objects/CategoryPage'
 
-test.describe('Shipping Funcionality', () => {
+test.describe('Positive tests - Searching filters', () => {
   let categoryPage: CategoryPage
 
   test.beforeEach(async ({ page }) => {
@@ -12,9 +12,55 @@ test.describe('Shipping Funcionality', () => {
     await page.waitForLoadState('networkidle')
   })
 
-  // TODO
-  test('All input fields - Positive', async ({ page }) => {})
+  test('should toggle filter groups on click', async ({ page }) => {
+    const headerToggle = page.locator('.fas.fa-chevron-circle-down.ml-auto')
+    const filterPanel = page.locator('#mz-filter-content-0')
 
-  // TODO
-  test('Invalid address field - Negative', async ({ page }) => {})
+    // Ensure the filter panel starts as visible
+    await expect(filterPanel).toHaveClass(/show/) // Class contains "show"
+
+    // Click to toggle visibility
+    await headerToggle.click()
+
+    await page.waitForTimeout(2000)
+
+    // Wait for the panel's class to no longer include "show"
+    await expect(filterPanel).not.toHaveClass(/show/)
+
+    // Click again to toggle visibility back
+    await headerToggle.click({ force: true })
+
+    await page.waitForTimeout(2000)
+
+    // Wait for the panel's class to include "show"
+    await expect(filterPanel).toHaveClass(/show/)
+  })
+
+  //   test('should not accept price inputs outside range', async ({ page }) => {
+  //     const minInput = page.locator('input[placeholder="Minimum Price"]');
+
+  //     // Attempt to input an out-of-range value
+  //     await minInput.fill('50');
+  //     await expect(minInput).not.toHaveValue('50'); // Assuming '50' is out-of-range
+  //   });
+
+  //   test('should check and uncheck manufacturer options', async ({ page }) => {
+  //     const checkbox = page.locator('label:text("Apple") >> input[type="checkbox"]');
+
+  //     // Check the checkbox
+  //     await checkbox.click();
+  //     await expect(checkbox).toBeChecked();
+
+  //     // Uncheck the checkbox
+  //     await checkbox.click();
+  //     await expect(checkbox).not.toBeChecked();
+  //   });
+
+  //   test('should reset all filters when Clear All is clicked', async ({ page }) => {
+  //     const resetButton = page.locator('text=Clear all');
+  //     const resetPanel = page.locator('[data-testid="mz-filter-reset"]');
+
+  //     await resetButton.click();
+  //     await expect(resetPanel).toHaveClass(/d-none/); // Verify the reset panel is hidden
+  //   });
 })
