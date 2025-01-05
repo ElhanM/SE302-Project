@@ -41,15 +41,12 @@ test.describe('Shipping Funcionality', () => {
     await expect(checkoutPage.quantityInput).toBeVisible()
     await expect(checkoutPage.quantityInput).toHaveValue('1')
 
-    const checkoutButton = page.locator(
-      'a.btn.btn-lg.btn-primary[href="https://ecommerce-playground.lambdatest.io/index.php?route=checkout/checkout"]',
-    )
-    await expect(checkoutButton).toBeVisible()
-    await checkoutButton.click({ force: true })
+    await expect(productDetailsPage.checkoutButton).toBeVisible()
+    await productDetailsPage.checkoutButton.click({ force: true })
 
     await page.waitForLoadState('networkidle')
 
-    await page.locator('#input-account-guest').click({ force: true })
+    await checkoutPage.inputAccountGuest.click({ force: true })
   })
 
   test('All input fields - Positive', async ({ page }) => {
@@ -67,23 +64,22 @@ test.describe('Shipping Funcionality', () => {
       stateValue: '421',
     })
 
-    await page.locator('#input-agree').click({ force: true })
+    await checkoutPage.inputAgree.click({ force: true })
 
     await page.waitForTimeout(2000)
 
-    const saveButton = page.locator('#button-save')
-    await saveButton.click({ force: true })
+    await checkoutPage.saveButton.click({ force: true })
 
     await page.waitForTimeout(2000)
 
-    const confirmButton = page.locator('#button-confirm')
-    await confirmButton.click()
+    await checkoutPage.confirmButton.click()
 
     await page.waitForLoadState('networkidle')
 
-    const confirmationMessage = page.locator('.page-title')
-    await expect(confirmationMessage).toBeVisible()
-    await expect(confirmationMessage).toHaveText('Your order has been placed!')
+    await expect(checkoutPage.confirmationMessage).toBeVisible()
+    await expect(checkoutPage.confirmationMessage).toHaveText(
+      'Your order has been placed!',
+    )
   })
 
   test('Invalid address field - Negative', async ({ page }) => {
@@ -102,20 +98,18 @@ test.describe('Shipping Funcionality', () => {
       stateValue: '421',
     })
 
-    await page.locator('#input-agree').click({ force: true })
+    await checkoutPage.inputAgree.click({ force: true })
 
     await page.waitForTimeout(2000)
 
-    const saveButton = page.locator('#button-save')
-    await saveButton.click({ force: true })
+    await checkoutPage.saveButton.click({ force: true })
 
     await page.waitForTimeout(2000)
 
     // Check for other invalid feedback messages
-    const errorMessages = page.locator('.invalid-feedback')
-    const errorMessagesCount = await errorMessages.count()
+    const errorMessagesCount = await checkoutPage.errorMessages.count()
     for (let i = 0; i < errorMessagesCount; i++) {
-      const errorMessage = await errorMessages.nth(i).textContent()
+      const errorMessage = await checkoutPage.errorMessages.nth(i).textContent()
       if (i === 0) {
         expect(
           errorMessage === 'First Name must be between 1 and 32 characters!',
