@@ -25,7 +25,7 @@ test.describe('Login Page', () => {
     page,
     baseURL,
   }) => {
-    await loginPage.login('ius-project@test.com', 'ius-project')
+    await loginPage.login('ius-project2@test.com', 'ius-project')
     await page.waitForLoadState('networkidle')
     await loginPage.assertSuccessfulLogin(baseURL as string)
   })
