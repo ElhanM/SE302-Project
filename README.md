@@ -39,17 +39,3 @@ This repository contains automated tests for the [LambdaTest E-Commerce platform
   ```bash
   npx playwright test path/to/test.spec.ts --config=playwright.config.ts --project=chromium --project=firefox --headed
   ```
-
-## Test Scenarios
-
-<!-- TODO -->
-
-### Smoke Tests
-
-### Regression Tests
-
-## Thank you
-
-A heartfelt thank you to the teaching assistants who will be dedicating their time and expertise to evaluate this project. Your guidance and feedback are invaluable, and we appreciate the effort you put into helping us grow as students. 🙌
-
-Thank you for your commitment to our learning journey!

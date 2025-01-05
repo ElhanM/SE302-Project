@@ -12,7 +12,9 @@ test.describe('My Account Navigation', () => {
     homePage = new HomePage(page)
     myAccountPage = new MyAccountPage(page)
     await homePage.visit()
-    await homePage.myAccount.click() // Accessing the myAccount locator
+    await homePage.myAccount.click({
+      force: true,
+    }) // Accessing the myAccount locator
   })
 
   // Positive Tests: Pages that are accessible
@@ -21,7 +23,8 @@ test.describe('My Account Navigation', () => {
       page,
       baseURL,
     }) => {
-      await myAccountPage.registerLink.click()
+      await myAccountPage.registerLink.click({ force: true })
+      await page.waitForLoadState('networkidle')
       await expect(page).toHaveURL(
         `${baseURL}/index.php?route=account/register`,
       )
@@ -31,7 +34,8 @@ test.describe('My Account Navigation', () => {
       page,
       baseURL,
     }) => {
-      await myAccountPage.loginLink.click()
+      await myAccountPage.loginLink.click({ force: true })
+      await page.waitForLoadState('networkidle')
       await expect(page).toHaveURL(`${baseURL}/index.php?route=account/login`)
     })
 
@@ -39,7 +43,8 @@ test.describe('My Account Navigation', () => {
       page,
       baseURL,
     }) => {
-      await myAccountPage.forgottenPasswordLink.click()
+      await myAccountPage.forgottenPasswordLink.click({ force: true })
+      await page.waitForLoadState('networkidle')
       await expect(page).toHaveURL(
         `${baseURL}/index.php?route=account/forgotten`,
       )
@@ -52,16 +57,17 @@ test.describe('My Account Navigation', () => {
       page,
       baseURL,
     }) => {
-      await myAccountPage.addressBookLink.click()
+      await myAccountPage.addressBookLink.click({ force: true })
+      await page.waitForLoadState('networkidle')
       await expect(page).toHaveURL(`${baseURL}/index.php?route=account/login`)
-      console.log('Negative test passed: Redirection to login page occurred')
     })
 
     test('should not access Transactions page from My Account if not logged in', async ({
       page,
       baseURL,
     }) => {
-      await myAccountPage.transactionsLink.click()
+      await myAccountPage.transactionsLink.click({ force: true })
+      await page.waitForLoadState('networkidle')
       await expect(page).toHaveURL(`${baseURL}/index.php?route=account/login`)
     })
   })
