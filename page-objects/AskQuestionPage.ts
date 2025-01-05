@@ -25,6 +25,12 @@ export class AskQuestionPage {
     this.errorMessage = page.locator('.error.text-danger')
   }
 
+  async visit() {
+    await this.page.goto(
+      '/index.php?route=product/product&path=57&product_id=28',
+    )
+  }
+
   async fillForm(
     name: string,
     email: string,

@@ -17,6 +17,7 @@ test.describe('Login Page', () => {
     page,
   }) => {
     await loginPage.login('ius-invalid@example.com', 'invalidpassword')
+    await page.waitForLoadState('networkidle')
     await loginPage.assertErrorMessage()
   })
 
@@ -25,7 +26,7 @@ test.describe('Login Page', () => {
     baseURL,
   }) => {
     await loginPage.login('ius-project@test.com', 'ius-project')
-    await page.waitForTimeout(5000)
+    await page.waitForLoadState('networkidle')
     await loginPage.assertSuccessfulLogin(baseURL as string)
   })
 })
