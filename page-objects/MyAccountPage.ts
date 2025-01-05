@@ -15,6 +15,7 @@ export class MyAccountPage {
   readonly rewardPointsLink: Locator
   readonly returnsLink: Locator
   readonly newsletterLink: Locator
+  readonly changePasswordLink: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -31,6 +32,10 @@ export class MyAccountPage {
     this.rewardPointsLink = page.locator('text=Reward Points')
     this.returnsLink = page.locator('returns')
     this.newsletterLink = page.locator('text=Newsletter')
+    this.changePasswordLink = page
+      .locator('#content div')
+      .filter({ hasText: 'Change your password' })
+      .nth(3)
   }
 
   async visit() {
