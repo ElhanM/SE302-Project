@@ -5,6 +5,7 @@ import { ForgottenPasswordPage } from '../../page-objects/ForgottenPasswordPage'
 test.describe('Forgotten Password Flow', () => {
   let loginPage: LoginPage
   let forgottenPaswordPage: ForgottenPasswordPage
+
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page)
     forgottenPaswordPage = new ForgottenPasswordPage(page)
@@ -21,47 +22,34 @@ test.describe('Forgotten Password Flow', () => {
     await expect(loginPage.forgottenEmailInput).toBeVisible()
   })
 
-  test('Negative', async ({ page }) => {
+  test('Negative', async () => {
     await loginPage.forgottenEmailInput.fill('test@my-example.com')
 
     await forgottenPaswordPage.continueButton.click({ force: true })
 
-    await Promise.race([
-      forgottenPaswordPage.errorMessage
-        .waitFor({ state: 'visible' })
-        .catch(() => null),
-    ])
+    await forgottenPaswordPage.errorMessage.waitFor({
+      state: 'visible',
+      timeout: 5000,
+    })
+    console.log('Error message displayed')
 
-    if (await forgottenPaswordPage.errorMessage.isVisible()) {
-      await expect(forgottenPaswordPage.errorMessage).toContainText(
-        /Warning|The email|found/i,
-      )
-    } else {
-      throw new Error(
-        'No success or error message appeared after submitting the Forgot Password form.',
-      )
-    }
+    await expect(forgottenPaswordPage.errorMessage).toContainText(
+      /warning|not found|error/i,
+    )
   })
 
-  test('Positive', async ({ page }) => {
+  test('Positive', async () => {
     await loginPage.forgottenEmailInput.fill('mustafasinanovic@outlook.com')
 
     await forgottenPaswordPage.continueButton.click({ force: true })
 
-    await Promise.race([
-      forgottenPaswordPage.successMessage
-        .waitFor({ state: 'visible' })
-        .catch(() => null),
-    ])
+    await forgottenPaswordPage.successMessage.waitFor({
+      state: 'visible',
+      timeout: 5000,
+    })
 
-    if (await forgottenPaswordPage.successMessage.isVisible()) {
-      await expect(forgottenPaswordPage.successMessage).toContainText(
-        /success|An email|confirmation/i,
-      )
-    } else {
-      throw new Error(
-        'No success or error message appeared after submitting the Forgot Password form.',
-      )
-    }
+    await expect(forgottenPaswordPage.successMessage).toContainText(
+      /email|confirmation/i,
+    )
   })
 })
