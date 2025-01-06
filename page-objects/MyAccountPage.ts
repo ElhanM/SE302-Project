@@ -31,7 +31,9 @@ export class MyAccountPage {
     this.recurringPaymentsLink = page.locator('text=Recurring payments')
     this.rewardPointsLink = page.locator('text=Reward Points')
     this.returnsLink = page.locator('returns')
-    this.newsletterLink = page.locator('text=Newsletter')
+    this.newsletterLink = page.locator(
+      'text= Subscribe / unsubscribe to newsletter',
+    )
     this.changePasswordLink = page
       .locator('#content div')
       .filter({ hasText: 'Change your password' })
