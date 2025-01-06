@@ -7,6 +7,8 @@ export class LoginPage {
   readonly loginButton: Locator
   readonly errorMessage: Locator
   readonly successMessage: Locator
+  forgottenPasswordLink: Locator
+  forgottenEmailInput: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -14,6 +16,12 @@ export class LoginPage {
     this.passwordInput = page.locator('#input-password')
     this.loginButton = page.locator('input[value="Login"]')
     this.errorMessage = page.locator('.alert-danger')
+    this.forgottenPasswordLink = page.locator(
+      'form a[href*="account/forgotten"]',
+    )
+    this.forgottenEmailInput = page.locator(
+      'input#input-email, input[name="email"]',
+    )
   }
 
   async visit() {
