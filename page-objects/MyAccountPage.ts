@@ -16,6 +16,7 @@ export class MyAccountPage {
   readonly returnsLink: Locator
   readonly newsletterLink: Locator
   readonly changePasswordLink: Locator
+  readonly affiliateCreateLink: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -38,6 +39,9 @@ export class MyAccountPage {
       .locator('#content div')
       .filter({ hasText: 'Change your password' })
       .nth(3)
+    this.affiliateCreateLink = page.locator(
+      'a[href*="affiliate/add"]:has-text("Register for an affiliate account")',
+    )
   }
 
   async visit() {
