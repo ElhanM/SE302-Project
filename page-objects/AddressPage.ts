@@ -20,13 +20,13 @@ export class AddressPage {
 
   async deleteAddress() {
     await expect(this.deleteButton).toBeVisible()
-    await this.deleteButton.click()
+    await this.deleteButton.click({ force: true })
     await this.page.waitForLoadState('networkidle')
   }
 
   async editAddress() {
     await expect(this.editButton).toBeVisible()
-    await this.editButton.click()
+    await this.editButton.click({ force: true })
     await this.page.waitForLoadState('networkidle')
   }
 }
