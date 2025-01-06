@@ -31,7 +31,6 @@ test.describe('Forgotten Password Flow', () => {
       state: 'visible',
       timeout: 5000,
     })
-    console.log('Error message displayed')
 
     await expect(forgottenPaswordPage.errorMessage).toContainText(
       /warning|not found|error/i,
