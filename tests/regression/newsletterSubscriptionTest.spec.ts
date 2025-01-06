@@ -13,7 +13,7 @@ test.describe('Newsletter Subscription', () => {
     loginPage = new LoginPage(page)
     myAccountPage = new MyAccountPage(page)
     await loginPage.visit()
-    await loginPage.login('changePasswordTest@test.com', 'lockedinalien')
+    await loginPage.login('ius-project2@test.com', 'ius-project')
     await page.waitForLoadState('networkidle')
     await myAccountPage.newsletterLink.click({ force: true })
     await page.waitForLoadState('networkidle')
