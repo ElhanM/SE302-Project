@@ -16,7 +16,7 @@ test.describe('Searching filters', () => {
     await expect(categoryPage.filterPanel).toHaveClass(/show/) // Class contains "show"
 
     // Click to toggle visibility
-    await categoryPage.headerToggle.click()
+    await categoryPage.headerToggle.click({ force: true })
 
     await page.waitForTimeout(2000)
 

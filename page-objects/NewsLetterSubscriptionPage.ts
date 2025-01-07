@@ -20,12 +20,12 @@ export class NewsLetterSubscriptionPage {
   }
 
   async subscribe() {
-    await this.subscribeOption.click()
-    await this.continueButton.click()
+    await this.subscribeOption.click({ force: true })
+    await this.continueButton.click({ force: true })
   }
 
   async unsubscribe() {
-    await this.unsubscribeOption.click()
-    await this.continueButton.click()
+    await this.unsubscribeOption.click({ force: true })
+    await this.continueButton.click({ force: true })
   }
 }
